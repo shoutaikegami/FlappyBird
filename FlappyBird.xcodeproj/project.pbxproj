@@ -12,6 +12,7 @@
 		407B8E311F6B5699008C4938 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 407B8E2F1F6B5699008C4938 /* Main.storyboard */; };
 		407B8E331F6B5699008C4938 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 407B8E321F6B5699008C4938 /* Assets.xcassets */; };
 		407B8E361F6B5699008C4938 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 407B8E341F6B5699008C4938 /* LaunchScreen.storyboard */; };
+		407B8E3F1F6B570B008C4938 /* SpriteKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 407B8E3E1F6B570B008C4938 /* SpriteKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,7 @@
 		407B8E321F6B5699008C4938 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		407B8E351F6B5699008C4938 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		407B8E371F6B5699008C4938 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		407B8E3E1F6B570B008C4938 /* SpriteKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SpriteKit.framework; path = System/Library/Frameworks/SpriteKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,6 +31,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				407B8E3F1F6B570B008C4938 /* SpriteKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -40,6 +43,7 @@
 			children = (
 				407B8E2A1F6B5699008C4938 /* FlappyBird */,
 				407B8E291F6B5699008C4938 /* Products */,
+				407B8E3D1F6B570B008C4938 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -62,6 +66,14 @@
 				407B8E371F6B5699008C4938 /* Info.plist */,
 			);
 			path = FlappyBird;
+			sourceTree = "<group>";
+		};
+		407B8E3D1F6B570B008C4938 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				407B8E3E1F6B570B008C4938 /* SpriteKit.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
