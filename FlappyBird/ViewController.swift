@@ -34,6 +34,13 @@ class ViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    // ステータスバーを消す
+    override var prefersStatusBarHidden: Bool {
+        get {
+            return true
+        }
+    }
 
 
 }
