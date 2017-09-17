@@ -258,52 +258,48 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func setupItem() {
-        // 四角を生成するアクションを作成
-        let createSquareItemAnimation = SKAction.run({
+        // アイテムを生成するアクションを作成
+        let createItemAnimation = SKAction.run({
         
-            let squareItem = SKSpriteNode(
-                color: UIColor.red,
-                size: CGSize(
-                    width: CGFloat(30),
-                    height: CGFloat(30)
-            )
-        )
+        let itemTexture = SKTexture(imageNamed: "item")
+        itemTexture.filteringMode = SKTextureFilteringMode.linear
         
         let random = arc4random_uniform( UInt32(self.frame.size.height - CGFloat(110)))
-        squareItem.position = CGPoint(x: self.frame.size.width, y: CGFloat(random) + CGFloat(110))
+        let item = SKSpriteNode(texture: itemTexture)
+        item.position = CGPoint(x: self.frame.size.width, y: CGFloat(random) + CGFloat(110))
             
-        // 四角アイテムに物理演算を設定する
-        squareItem.physicsBody = SKPhysicsBody(rectangleOf: squareItem.size)
-        squareItem.physicsBody?.categoryBitMask = self.itemCategory
-        squareItem.physicsBody?.contactTestBitMask = self.birdCategory
+        // アイテムに物理演算を設定する
+        item.physicsBody = SKPhysicsBody(rectangleOf: item.size)
+        item.physicsBody?.categoryBitMask = self.itemCategory
+        item.physicsBody?.contactTestBitMask = self.birdCategory
         
         // 衝突の時に動かないように設定する
-        squareItem.physicsBody?.isDynamic = false
+        item.physicsBody?.isDynamic = false
         
-        //移動する距離を計算
-        let movingDistance = CGFloat(self.frame.size.width + squareItem.size.width * 2)
+        // 移動する距離を計算
+        let movingDistance = CGFloat(self.frame.size.width + itemTexture.size().width * 2)
         
-        // 四角が移動するアニメーションを作成
-        let moveSquareItem = SKAction.moveBy(x: -movingDistance, y: 0, duration: 3.0)
+        // アイテムが移動するアニメーションを作成
+        let moveItem = SKAction.moveBy(x: -movingDistance, y: 0, duration: 3.0)
         
-        // 四角を取り除くアクションを作成
-        let removeSquareItem = SKAction.removeFromParent()
+        // アイテムを取り除くアクションを作成
+        let removeItem = SKAction.removeFromParent()
         
         //２つのアニメーションを順に実行するアクションの作成
-        let squareItemAnimation = SKAction.sequence([moveSquareItem, removeSquareItem])
+        let itemAnimation = SKAction.sequence([moveItem, removeItem])
         
-        // 四角にアニメーションを追加
-        squareItem.run(squareItemAnimation)
+        // アイテムにアニメーションを追加
+        item.run(itemAnimation)
         
-        self.itemNode.addChild(squareItem)
+        self.itemNode.addChild(item)
             
         })
         
-        //次の四角作成までの待ち時間のアクションを作成
+        //次のアイテム作成までの待ち時間のアクションを作成
         let waitAnimation = SKAction.wait(forDuration: 4)
         
-        // 四角を作成->待ち時間->四角の作成を無限に繰り返すアクションを作成
-        let repeatForeverAnimation = SKAction.repeatForever(SKAction.sequence([createSquareItemAnimation, waitAnimation]))
+        // アイテムを作成->待ち時間->四角の作成を無限に繰り返すアクションを作成
+        let repeatForeverAnimation = SKAction.repeatForever(SKAction.sequence([createItemAnimation, waitAnimation]))
         
         run(repeatForeverAnimation)
         
@@ -345,7 +341,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             }
         } else if (contact.bodyA.categoryBitMask & itemCategory) == itemCategory {
 
-            // 四角のアイテムと衝突した
+            // アイテムと衝突した
             print("ItemScoreUp")
             itemScore += 1
             itemScoreLabelNode.text = "ItemScore:\(itemScore)"
@@ -360,9 +356,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             let unhideItem = SKAction.unhide()
             
             //4つのアクションを順に実行するアニメーションの作成
-            let squareItemAnimation = SKAction.sequence([hideItem, sound, waitItem, unhideItem])
+            let itemAnimation = SKAction.sequence([hideItem, sound, waitItem, unhideItem])
             
-            itemNode.run(squareItemAnimation)
+            itemNode.run(itemAnimation)
             
         } else {
             // 壁か地面と衝突した

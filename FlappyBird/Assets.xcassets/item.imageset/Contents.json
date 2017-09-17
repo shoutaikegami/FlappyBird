@@ -1,20 +1,6 @@
 {
   "images" : [
     {
-      "resizing" : {
-        "mode" : "9-part",
-        "center" : {
-          "mode" : "tile",
-          "width" : 1,
-          "height" : 1
-        },
-        "cap-insets" : {
-          "bottom" : 17,
-          "top" : 16,
-          "right" : 20,
-          "left" : 19
-        }
-      },
       "idiom" : "universal",
       "filename" : "item.png",
       "scale" : "1x"
