@@ -5,12 +5,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var scrollNode:SKNode!
     var wallNode:SKNode!
     var bird:SKSpriteNode!
+    var itemNode:SKSpriteNode!
     
     // 衝突判定カテゴリー
     let birdCategory: UInt32 = 1 << 0 // 0...00001
     let groundCategory: UInt32 = 1 << 1 // 0...00010
     let wallCategory: UInt32 = 1 << 2 // 0...00100
     let scoreCategory: UInt32 = 1 << 3 // 0...01000
+    let itemCategory: UInt32 = 1 << 4 // 0...10000
     
     // スコア
     var score = 0
@@ -35,6 +37,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         wallNode = SKNode()
         scrollNode.addChild(wallNode)
         
+        // アイテム用のノード
+        itemNode = SKSpriteNode()
+        addChild(itemNode)
+        
         // 各種スプライトを生成する処理をメソッドに分割
         setupGround()
         setupCloud()
@@ -42,6 +48,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         setupBird()
         
         setupScoreLabel()
+        setupItem()
 
     }
     
@@ -133,10 +140,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let moveWall = SKAction.moveBy(x: -movingDistance, y: 0, duration: 4.0)
         
         // 自身を取り除くアクションを設定
-        let removewWall = SKAction.removeFromParent()
+        let removeWall = SKAction.removeFromParent()
         
         // この２つのアニメーションを順に実行するアクションを作成
-        let wallAnimation = SKAction.sequence([moveWall, removewWall])
+        let wallAnimation = SKAction.sequence([moveWall, removeWall])
         
         // 壁を生成するアクションを設定
         let createWallAnimation = SKAction.run({
@@ -209,7 +216,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func setupBird() {
-        // 鳥の画像を２種類取り込む
+        // 鳥の画像を２種類読み込む
         let birdTextureA = SKTexture(imageNamed: "bird_a")
         birdTextureA.filteringMode = SKTextureFilteringMode.linear
         let birdTextureB = SKTexture(imageNamed: "bird_b")
@@ -232,7 +239,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         // 衝突のカテゴリーを設定
         bird.physicsBody?.categoryBitMask = birdCategory
         bird.physicsBody?.collisionBitMask = groundCategory | wallCategory
-        bird.physicsBody?.contactTestBitMask = groundCategory | wallCategory
+        bird.physicsBody?.contactTestBitMask = (groundCategory | wallCategory) | itemCategory
         
         // アニメーションを設定
         bird.run(flap)
@@ -241,6 +248,58 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         addChild(bird)
     }
     
+    func setupItem() {
+        // 四角を生成するアクションを作成
+        let createSquareItemAnimation = SKAction.run({
+        
+            let squareItem = SKSpriteNode(
+                color: UIColor.red,
+                size: CGSize(
+                    width: CGFloat(30),
+                    height: CGFloat(30)
+            )
+        )
+        
+        let random = arc4random_uniform( UInt32(self.frame.size.height - CGFloat(110)))
+        squareItem.position = CGPoint(x: self.frame.size.width, y: CGFloat(random) + CGFloat(110))
+            
+        // 四角アイテムに物理演算を設定する
+        squareItem.physicsBody = SKPhysicsBody(rectangleOf: squareItem.size)
+        squareItem.physicsBody?.categoryBitMask = self.itemCategory
+        squareItem.physicsBody?.contactTestBitMask = self.birdCategory
+        
+        // 衝突の時に動かないように設定する
+        squareItem.physicsBody?.isDynamic = false
+        
+        //移動する距離を計算
+        let movingDistance = CGFloat(self.frame.size.width + squareItem.size.width * 2)
+        
+        // 四角のアニメーションを作成
+        let moveSquareItem = SKAction.moveBy(x: -movingDistance, y: 0, duration: 4.0)
+        
+        // 四角を取り除くアクションを作成
+        let removeSquareItem = SKAction.removeFromParent()
+        
+        //２つのアニメーションを順に実行するアクションの作成
+        let squareItemAnimation = SKAction.sequence([moveSquareItem, removeSquareItem])
+        
+        // 四角にアニメーションを追加
+        squareItem.run(squareItemAnimation)
+        
+        self.itemNode.addChild(squareItem)
+            
+        })
+        
+        //次の四角作成までの待ち時間のアクションを作成
+        let waitAnimation = SKAction.wait(forDuration: 4)
+        
+        // 四角を作成->待ち時間->四角の作成を無限に繰り返すアクションを作成
+        let repeatForeverAnimation = SKAction.repeatForever(SKAction.sequence([createSquareItemAnimation, waitAnimation]))
+        
+        run(repeatForeverAnimation)
+        
+    }
+
     // 画面をタッチした時に呼ばれる
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         if scrollNode.speed > 0 {
@@ -275,6 +334,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 userDefaults.set(bestScore, forKey: "BEST")
                 userDefaults.synchronize()
             }
+        } else if (contact.bodyA.categoryBitMask & itemCategory) == itemCategory || (contact.bodyB.categoryBitMask & itemCategory) == itemCategory {
+            // 四角のアイテムと衝突した
+            print("四角のアイテムと衝突した")
+            
+            self.itemNode.removeAllActions()
+            
         } else {
             // 壁か地面と衝突した
             print("GameOver")
@@ -326,6 +391,5 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         bestScoreLabelNode.text = "Best Score:\(bestScore)"
         self.addChild(bestScoreLabelNode)
     }
-
     
 }
