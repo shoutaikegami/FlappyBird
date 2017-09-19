@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4001CD041F7103A700C38E6A /* sound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 4001CD031F7103A700C38E6A /* sound.mp3 */; };
 		4029213B1F6B780900F47212 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4029213A1F6B780900F47212 /* GameScene.swift */; };
 		407B8E2C1F6B5699008C4938 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 407B8E2B1F6B5699008C4938 /* AppDelegate.swift */; };
 		407B8E2E1F6B5699008C4938 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 407B8E2D1F6B5699008C4938 /* ViewController.swift */; };
@@ -14,10 +15,10 @@
 		407B8E331F6B5699008C4938 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 407B8E321F6B5699008C4938 /* Assets.xcassets */; };
 		407B8E361F6B5699008C4938 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 407B8E341F6B5699008C4938 /* LaunchScreen.storyboard */; };
 		407B8E3F1F6B570B008C4938 /* SpriteKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 407B8E3E1F6B570B008C4938 /* SpriteKit.framework */; };
-		40DE5C051F70EE3F009D9289 /* sound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 40DE5C041F70EE3F009D9289 /* sound.mp3 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4001CD031F7103A700C38E6A /* sound.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = sound.mp3; sourceTree = "<group>"; };
 		4029213A1F6B780900F47212 /* GameScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
 		407B8E281F6B5699008C4938 /* FlappyBird.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FlappyBird.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		407B8E2B1F6B5699008C4938 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -27,7 +28,6 @@
 		407B8E351F6B5699008C4938 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		407B8E371F6B5699008C4938 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		407B8E3E1F6B570B008C4938 /* SpriteKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SpriteKit.framework; path = System/Library/Frameworks/SpriteKit.framework; sourceTree = SDKROOT; };
-		40DE5C041F70EE3F009D9289 /* sound.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = sound.mp3; path = ../../../sound.mp3; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,8 +68,8 @@
 				407B8E2F1F6B5699008C4938 /* Main.storyboard */,
 				407B8E321F6B5699008C4938 /* Assets.xcassets */,
 				407B8E341F6B5699008C4938 /* LaunchScreen.storyboard */,
+				4001CD031F7103A700C38E6A /* sound.mp3 */,
 				407B8E371F6B5699008C4938 /* Info.plist */,
-				40DE5C041F70EE3F009D9289 /* sound.mp3 */,
 			);
 			path = FlappyBird;
 			sourceTree = "<group>";
@@ -141,10 +141,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4001CD041F7103A700C38E6A /* sound.mp3 in Resources */,
 				407B8E361F6B5699008C4938 /* LaunchScreen.storyboard in Resources */,
 				407B8E331F6B5699008C4938 /* Assets.xcassets in Resources */,
 				407B8E311F6B5699008C4938 /* Main.storyboard in Resources */,
-				40DE5C051F70EE3F009D9289 /* sound.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

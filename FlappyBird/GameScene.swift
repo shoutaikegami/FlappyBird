@@ -27,7 +27,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     // 効果音を読み込む
     let sound = SKAction.playSoundFileNamed("sound.mp3", waitForCompletion: true)
-    
+
     // SKView上にシーンが表示されたときに呼ばれるメソッド
     override func didMove(to view: SKView) {
         // 重力を設定
